@@ -8,7 +8,8 @@
 #include <strings.h>
 #include <stdlib.h>
 #include <netinet/in.h>
-#include "thirdparty/libev/include/ev.h"
+#include <iostream>
+#include "ev.h"
 
 #define PORT 9999
 #define BUFFER_SIZE 1024
@@ -30,7 +31,7 @@ int main()
     // 创建socket的写法,这里简单处理,用INADDR_ANY ,匹配任何客户端请求.这里写法都一样,没什么特别的,直接copy都可以用
     if( (sd = socket(PF_INET, SOCK_STREAM, 0)) < 0 )
     {
-        printf("socket error");
+        std::cout << "socket error";
         return -1;
     }
     bzero(&addr, sizeof(addr));
@@ -39,11 +40,11 @@ int main()
     addr.sin_addr.s_addr = INADDR_ANY;
     if (bind(sd, (struct sockaddr*) &addr, sizeof(addr)) != 0)
     {
-        printf("bind error");
+        std::cout << "bind error"  << std::endl;
     }
     if (listen(sd, 2) < 0)
     {
-        printf("listen error");
+        std::cout << "listen error"  << std::endl;
         return -1;
     }
 
@@ -77,7 +78,7 @@ void accept_cb(struct ev_loop *loop, struct ev_io *watcher, int revents)
     //libev的错误处理
     if(EV_ERROR & revents)
     {
-        printf("error event in accept");
+        std::cout << "error event in accept"  << std::endl;
         return;
     }
 
@@ -85,11 +86,11 @@ void accept_cb(struct ev_loop *loop, struct ev_io *watcher, int revents)
     client_sd = accept(watcher->fd, (struct sockaddr *)&client_addr, &client_len);
     if (client_sd < 0)
     {
-        printf("accept error");
+         std::cout << "accept error"  << std::endl;
         return;
     }
 
-    printf("someone connected.\n");
+     std::cout << "someone connected.\n"  << std::endl;
 
     //开始监听读事件了,有客户端信息就会被监听到
     ev_io_init(w_client, read_cb, client_sd, EV_READ);
@@ -103,7 +104,7 @@ void read_cb(struct ev_loop *loop, struct ev_io *watcher, int revents){
 
     if(EV_ERROR & revents)
     {
-        printf("error event in read");
+         std::cout << "error event in read"  << std::endl;
         return;
     }
 
@@ -112,21 +113,21 @@ void read_cb(struct ev_loop *loop, struct ev_io *watcher, int revents){
 
     if(read < 0)
     {
-        printf("read error");
+         std::cout << "read error"  << std::endl;
         return;
     }
 
     //断开链接的处理,停掉evnet就可以,同时记得释放客户端的结构体!
     if(read == 0)
     {
-        printf("someone disconnected.\n");
+         std::cout << "someone disconnected."  << std::endl;
         ev_io_stop(loop,watcher);
         free(watcher);
         return;
     }
     else
     {
-        printf("get the message:%s\n",buffer);
+         std::cout << "get the message:" << buffer << std::endl;
     }
 
     //原信息返回,也可以自己写信息,都一样.最后记得置零

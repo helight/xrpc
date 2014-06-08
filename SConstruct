@@ -12,6 +12,5 @@ env.Append(CCFLAGS = ['-Wall', '-O2', '-g'])
 env.Append(LINKFLAGS = ['-static'])
 Export('env')
 
-SConscript(['test/SConscript'], exports = 'env')
 SConscript(['xsrv/SConscript'], exports = 'env')
 SConscript(['xsrv_demo/SConscript'], exports = 'env')

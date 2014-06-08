@@ -1,3 +1,8 @@
+// Copyright (c) 2014, HelightXu
+// Author: Zhwen Xu<HelightXu@gmail.com>
+// Created: 2014-06-08
+// Description:
+//
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>

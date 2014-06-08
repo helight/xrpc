@@ -168,8 +168,7 @@ function install_all()
 #    install_tar_gz_package libevent libevent-2.0.21-stable.tar.gz
 #    install_tar_gz_package gflags gflags-2.0.tar.gz
 #    install_tar_gz_package glog glog-0.3.3.tar.gz
-#    install_tar_gz_package libev libev-4.15.tar.gz
-    install_tar_gz_package libev libev-4.04.tar.gz
+    install_tar_gz_package libev libev-4.15.tar.gz
 #    install_thirft thirft thrift-0.9.1.tar.gz
 #    install_gtest
     install_jsonrpc

@@ -1,4 +1,4 @@
-/* 
+/*
  * xsrv
  *
  * CopyLeft (c) 2008-~ sebastien.vincent@cppextrem.com Helight.Xu@gmail.com
@@ -12,7 +12,7 @@
  */
 
  /*
- * file name: xudpserver.h  
+ * file name: xudpserver.h
  * modify date: 2012-03-11
  * Author: Sebastien Vincent,  Helight Xu
  *
@@ -37,18 +37,18 @@
 #include <stddef.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <string.h> 
+#include <string.h>
 #include <stdio.h>
 #include <fcntl.h>
 #include <errno.h>
 #include <err.h>
 #include <jsonrpc/jsonrpc.h>
-#include <json/json.h>
-#include <libev/ev.h>
-#include <commnet.h>
+#include <jsonrpc/json.h>
+#include <ev.h>
+#include "commnet.h"
 
 using namespace std;
-	
+
 /**
  * \class xudpserver
  * \brief Abstract JSON-RPC xudpserver.

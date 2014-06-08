@@ -40,9 +40,9 @@
 #include <fcntl.h>
 #include <errno.h>
 #include <err.h>
+#include "jsonrpc/jsonrpc.h"
+#include "jsonrpc/json.h"
 #include "ev.h"
-#include "jsonrpc.h"
-#include "json.h"
 
 using namespace std;
 

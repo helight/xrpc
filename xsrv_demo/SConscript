@@ -1,0 +1,24 @@
+Import('env')
+
+env.Prepend(LIBS = ['xsrv'])
+
+env.Program(
+    target = "tserver",
+    source = "tserver.cc",
+)
+
+env.Program(
+    target = "tclient",
+    source = "tclient.cc",
+)
+
+env.Program(
+    target = "userver",
+    source = "userver.cc"
+    )
+
+env.Program(
+    target = "uclient",
+    source = "uclient.cc",
+)
+

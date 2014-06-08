@@ -40,9 +40,9 @@
 #include <errno.h>
 #include <err.h>
 #include <ev.h>
-#include "jsonrpc.h"
-#include "json.h"
 #include "commnet.h"
+#include "jsonrpc/jsonrpc.h"
+#include "jsonrpc/json.h"
 
 /**
  * \class xtcpserver

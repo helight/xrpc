@@ -1,11 +1,11 @@
-#include <stdio.h> 
+#include <stdio.h>
 #include <unistd.h>
-#include <string.h> 
-#include <xudpclient.h>
+#include <string.h>
+#include "xsrv/xudpclient.h"
 
 int main(int argc, char *argv[])
 {
-	int len;
+	int len = 0;
 	string recvdata;
 	string strreq="{\"id\":10,\"jsonrpc\":\"2.0\",\"method\":\"Print\"}";
 
@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 		client.connect();
 		client.send(strreq);
 		len = client.recv(recvdata);
-		printf("%s\r\n", recvdata.c_str());
+		printf("msg:%s  len: %d\r\n", recvdata.c_str(), len);
 		client.close();
 	}
 

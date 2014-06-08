@@ -1,15 +1,17 @@
 import os
 env = Environment()  # Initialize the environment
 
-root_path = "/data/helight_project/xsrver3"
-#os.getcwd()
-print root_path
+root_path = os.getcwd()
 thirdparty = str(root_path) + "/thirdparty/"
-print thirdparty
-env.Append(LIBPATH = [thirdparty + '/libev/lib/', thirdparty + '/jsonrpc/'])
-env.Append(CPPPATH = [thirdparty + '/libev/include/', thirdparty + '/jsonrpc/'])
-env.Append(LIBS = ['ev'])
+
+env.Append(CPPPATH = [root_path, thirdparty, thirdparty + '/libev/include/'])
+env.Append(LIBPATH = [thirdparty + '/libev/lib/', thirdparty + '/jsonrpc/', root_path + '/xsrv'])
+env.Append(LIBS = ['jsonrpc', 'ev'])
+
+env.Append(CCFLAGS = ['-Wall', '-O2', '-g'])
 env.Append(LINKFLAGS = ['-static'])
 Export('env')
 
 SConscript(['test/SConscript'], exports = 'env')
+SConscript(['xsrv/SConscript'], exports = 'env')
+SConscript(['xsrv_demo/SConscript'], exports = 'env')

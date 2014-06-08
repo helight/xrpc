@@ -1,4 +1,4 @@
-/* 
+/*
  * xsrv
  *
  * CopyLeft (c) 2008-~ sebastien.vincent@cppextrem.com Helight.Xu@gmail.com
@@ -12,14 +12,14 @@
  */
 
  /*
- * file name: commnet.cc  
+ * file name: commnet.cc
  * modify date: 2012-03-11
  * Author: Sebastien Vincent,  Helight Xu
  *
  * Program definitions: common net function.
  */
 
-
+#include <iostream>
 #include "commnet.h"
 json::rpc::Handler *xhandler;
 
@@ -30,9 +30,9 @@ bool check(string &msg, json::Value &recv, json::Value &response);
 string GetString(json::Value value);
 
 bool check(string &msg, json::Value &recv, json::Value &response)
-{    
+{
 	bool parsing = false;
-	json::Value error;	
+	json::Value error;
 	json::Reader m_reader;
 	parsing = m_reader.parse(msg, recv);
 
@@ -63,7 +63,7 @@ int setnonblock(int fd)
 	if (flags < 0)
 		return flags;
 	flags |= O_NONBLOCK;
-	if (fcntl(fd, F_SETFL, flags) < 0) 
+	if (fcntl(fd, F_SETFL, flags) < 0)
 		return -1;
 
 	return 0;
@@ -119,7 +119,7 @@ static void Send(struct ev_loop *loop, struct ev_io *w, int revents)
 		cli->response["jsonrpc"] = "2.0";
 		cli->response["code"] = "OK";
 	}
-	//	cli->response["ip"] = inet_ntoa(cli->ipaddr);	
+	//	cli->response["ip"] = inet_ntoa(cli->ipaddr);
 	cli->handler->Process(rbuff, cli->response, (void *)cli);
 	response = GetString(cli->response);
 	if (revents & EV_WRITE) {
@@ -128,7 +128,7 @@ static void Send(struct ev_loop *loop, struct ev_io *w, int revents)
 	}
 
 	close(cli->fd);
-	free(cli);	
+	free(cli);
 }
 
 void udp_recv(struct ev_loop *loop, struct ev_io *w, int revents)
@@ -145,12 +145,12 @@ void udp_recv(struct ev_loop *loop, struct ev_io *w, int revents)
 	client->handler = xhandler;
 
 	if (revents & EV_READ) {
-		r = recvfrom(client->fd, client->rbuff, 1024, 0, 
+		r = recvfrom(client->fd, client->rbuff, 1024, 0,
 				(struct sockaddr *)&(client->client_addr), &client_len);
 		client->ipaddr = client->client_addr.sin_addr;
 		//r = read(client->fd, client->rbuff, 1024);
 	}
-	printf("rbuff: %s\n", client->rbuff);
+	std::cout << "rbuff: " << client->rbuff << std::endl;
 	ev_io_init(&client->ev_write, udp_send, client->fd, EV_WRITE);
 	ev_io_start(loop, &client->ev_write);
 }
@@ -166,19 +166,19 @@ static void udp_send(struct ev_loop *loop, struct ev_io *w, int revents)
 		cli->response["jsonrpc"] = "2.0";
 		cli->response["code"] = "OK";
 	}
-	cli->response["ip"] = inet_ntoa(cli->ipaddr);	
+	cli->response["ip"] = inet_ntoa(cli->ipaddr);
 	cli->handler->Process(rbuff, cli->response, (void *)cli);
 	response = GetString(cli->response);
-	printf("response: %s\n", response.c_str());
+	std::cout << "response: " << response.c_str() << std::endl;
 	if (revents & EV_WRITE) {
-		sendto(cli->fd, response.c_str(), strlen(response.c_str()), 0, 
+		sendto(cli->fd, response.c_str(), strlen(response.c_str()), 0,
 				(struct sockaddr *)&cli->client_addr, sizeof(struct sockaddr_in));
 		//write(cli->fd, response.c_str(), strlen(response.c_str()));
 		ev_io_stop(EV_A_ w);
 	}
 
 	//close(cli->fd);
-	free(cli);	
+	free(cli);
 }
 
 static void sighandler(int signum)

@@ -10,10 +10,10 @@ bool XAppConfig::LoadConf(const char* pConf)
 
 	if (SUCCEEDED!= ini.GetConfigStr("myIdentification","localIp",myIdentification.localIp,20)) {
 		return false;
-	}   
+	}
 	if (SUCCEEDED!= ini.GetConfigStr("myIdentification","myRole",myIdentification.myRole,20)) {
 		return false;
-	}  
+	}
 	if (SUCCEEDED!= ini.GetConfigStr("myIdentification","master_db_ip",myIdentification.master_db_ip,20)) {
 		return false;
 	}

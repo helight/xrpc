@@ -1,4 +1,4 @@
-/* 
+/*
  * xsrv
  *
  * CopyLeft (c) 2008-~ sebastien.vincent@cppextrem.com Helight.Xu@gmail.com
@@ -12,7 +12,7 @@
  */
 
  /*
- * file name: xudpclient.h  
+ * file name: xudpclient.h
  * modify date: 2012-03-11
  * Author: Sebastien Vincent,  Helight Xu
  *
@@ -21,14 +21,14 @@
 
 #ifndef XUDPCLIENT_H
 #define XUDPCLIENT_H
-#include <stdio.h> 
+#include <stdio.h>
 #include <unistd.h>
-#include <string.h> 
+#include <string.h>
 #include <sys/types.h>
-#include <sys/socket.h> 
-#include <netinet/in.h> 
-#include <arpa/inet.h> 
-#include <json/json.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <jsonrpc/json.h>
 
 using namespace std;
 
@@ -71,7 +71,7 @@ public:
 protected:
 	int m_sock;
 
-private:                                                                                                               
+private:
 	std::string m_address;
 	struct sockaddr_in m_sockaddr;
 	socklen_t m_sockaddrlen;

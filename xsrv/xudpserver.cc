@@ -1,4 +1,4 @@
-/* 
+/*
  * xsrv
  *
  * CopyLeft (c) 2008-~ sebastien.vincent@cppextrem.com Helight.Xu@gmail.com
@@ -12,7 +12,7 @@
  */
 
  /*
- * file name: xudpserver.cc  
+ * file name: xudpserver.cc
  * modify date: 2012-03-28
  * Author: Helight Xu
  *
@@ -43,10 +43,10 @@ bool xudpserver::Init()
 	if (m_sock > 0)
 		return true;
 	int sock;
-	struct sockaddr_in listen_addr; 
+	struct sockaddr_in listen_addr;
 	int reuseaddr_on = 1;
 
-	sock = socket(AF_INET, SOCK_DGRAM, 0); 
+	sock = socket(AF_INET, SOCK_DGRAM, 0);
 	if (sock < 0)
 		err(1, "listen failed");
 	if (setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, &reuseaddr_on,
@@ -86,6 +86,8 @@ bool xudpserver::Start(json::rpc::Handler &handler)
 	ev_io_init(&ev_accept, udp_recv, m_sock, EV_READ);
 	ev_io_start(loop,&ev_accept);
 	ev_loop (loop, 0);
+
+    return true;
 }
 
 int xudpserver::GetSocket() const
@@ -107,5 +109,5 @@ void xudpserver::Close()
 {
 	::close(m_sock);
 	m_sock = -1;
-} 
+}
 

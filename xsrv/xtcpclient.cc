@@ -1,12 +1,11 @@
-#include <stdio.h> 
+#include <stdio.h>
 #include <unistd.h>
-#include <string.h> 
+#include <string.h>
 #include <sys/types.h>
-#include <sys/socket.h> 
-#include <netinet/in.h> 
-#include <arpa/inet.h> 
-#include <json/json.h>
-#include <xtcpclient.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include "xtcpclient.h"
 
 xtcpclient::xtcpclient(const std::string& address, uint16_t port)
 {
@@ -17,7 +16,7 @@ xtcpclient::xtcpclient(const std::string& address, uint16_t port)
 
 xtcpclient::~xtcpclient()
 {
-	if (m_sock != -1) { 
+	if (m_sock != -1) {
 		close();
 	}
 }
@@ -25,7 +24,7 @@ xtcpclient::~xtcpclient()
 int xtcpclient::connect()
 {
 	int len;
-	int result;    
+	int result;
 	int sockfd;
 	struct sockaddr_in address;
 	address.sin_family = AF_INET;

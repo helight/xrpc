@@ -1,9 +1,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
-#include "xtcpserver.h"
-#include "config.h"
-#include "dbconn.h"
+#include "xsrv/xudpserver.h"
+#include "xsrv/config.h"
+// #include "xsrv/dbconn.h"
 
 class TestRpc
 {
@@ -31,7 +31,7 @@ public:
 	{
 		const json::Value& project_id = msg["project_id"];
 		response["jsonrpc"] = "2.0";
-		response["id"] = project_id;                                                                                         
+		response["id"] = project_id;
 		response["result"] = "success";
 
 		return true;
@@ -42,8 +42,8 @@ int main(int argc,char **argv){
 	json::rpc::Handler handler;
 	TestRpc rpc1(handler);
 
-	bool b = XAppConfig::GetInstance()->LoadConf("tconf.ini");  
-	if (!b) { 
+	bool b = XAppConfig::GetInstance()->LoadConf("tconf.ini");
+	if (!b) {
 		printf("load testconf.ini fail\n");
 		return false;
 	}
@@ -52,11 +52,11 @@ int main(int argc,char **argv){
 			XAppConfig::GetInstance()->GetMyIdentification()->myRole,
 			XAppConfig::GetInstance()->GetMyIdentification()->master_db_ip,
 			XAppConfig::GetInstance()->GetMyIdentification()->master_db_port
-	      );
+		  );
 
 	//dbconn(char* szHost,char* szDB,char* szUser,char* szPass,uint szPort)
 
-	xtcpserver server(std::string("127.0.0.1"), 8086);
+	xudpserver server(std::string("127.0.0.1"), 8080);
 
 	if (server.Start(handler)) {
 		printf("init server\n");

@@ -1,6 +1,6 @@
 /*
- * author : jerry
- * modify : tty (防止冲突)
+ * author :
+ * modify : (防止冲突)
  */
 
 #ifndef __XSRV_LOG_H__
@@ -64,7 +64,7 @@ private:
 
 	/** 日志文件的名字 */
 	char m_szBaseFileName[32];
-	
+
 private:
 
 	// 线程锁
@@ -99,7 +99,7 @@ extern xsrv_log* g_xsrv_log;
 
 #endif
 
-/*if(g_pLog) 
+/*if(g_pLog)
 int main()
 {
 	//初始化日志系统

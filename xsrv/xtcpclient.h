@@ -1,11 +1,11 @@
-#include <stdio.h> 
+#include <stdio.h>
 #include <unistd.h>
-#include <string.h> 
+#include <string.h>
 #include <sys/types.h>
-#include <sys/socket.h> 
-#include <netinet/in.h> 
-#include <arpa/inet.h> 
-#include <json/json.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <jsonrpc/json.h>
 
 using namespace std;
 
@@ -48,7 +48,7 @@ public:
 protected:
 	int m_sock;
 
-private:                                                                                                               
+private:
 	std::string m_address;
 
 	uint16_t m_port;

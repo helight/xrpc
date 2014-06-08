@@ -1,6 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
+#include <sstream>
+#include <string>
 #include "xsrv/xtcpserver.h"
 #include "xsrv/config.h"
 // #include "xsrv/dbconn.h"
@@ -22,7 +24,9 @@ public:
 		response["jsonrpc"] = "2.0";
 		response["id"] = msg["id"];
 		response["result"] = "success";
-		response["time"] = (char)time(NULL);
+        stringstream ss;
+        ss << time(NULL);
+		response["time"] = ss.str();
 		response["xip"] = inet_ntoa(cli->ipaddr);
 
 		return true;

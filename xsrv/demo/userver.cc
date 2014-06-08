@@ -1,8 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
-#include "xsrv/xudpserver.h"
-#include "xsrv/config.h"
+#include "server/xudpserver.h"
+#include "server/config.h"
 // #include "xsrv/dbconn.h"
 
 class TestRpc

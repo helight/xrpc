@@ -1,3 +1,8 @@
+// Copyright (c) 2014, HelightXu
+// Author: Zhwen Xu<HelightXu@gmail.com>
+// Created: 2014-06-08
+// Description:
+//
 //===================================================
 //	1 section 和 key大小写不敏感
 //	2 每行的最大长度 1024
@@ -44,7 +49,7 @@ public:
 
 private:
 
-	int GetSection(char* pBuf, string & strSection); 
+	int GetSection(char* pBuf, string & strSection);
 	int GetKey(char* pBuf, string & strKey, string & strValue);
 	int GetValue(char* pBuf, string & strValue);
 	int GetStr(char* &pBuf, string & str,char chEnd);

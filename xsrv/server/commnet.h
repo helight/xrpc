@@ -1,23 +1,8 @@
-/*
- * xsrv
- *
- * CopyLeft (c) 2008-~ sebastien.vincent@cppextrem.com Helight.Xu@gmail.com
- *
- * This source code is released for free distribution under the terms of the
- * the Free Software Foundation, version 3 of the License
- * GNU General Public License.
- * You should have received a copy of the GNU Lesser General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- */
-
- /*
- * file name: commnet.h
- * modify date: 2012-03-11
- * Author: Sebastien Vincent,  Helight Xu
- *
- * Program definitions: brief net api.
- */
+// Copyright (c) 2014, HelightXu
+// Author: Zhwen Xu<HelightXu@gmail.com>
+// Created: 2014-06-08
+// Description: net api
+//
 
 #ifndef XCOMMNET_H
 #define XCOMMNET_H
@@ -43,8 +28,6 @@
 #include "jsonrpc/jsonrpc.h"
 #include "jsonrpc/json.h"
 #include "ev.h"
-
-using namespace std;
 
 struct client {
 	int fd;

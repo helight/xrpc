@@ -1,8 +1,8 @@
-/*
- * author :
- * modify : (防止冲突)
- */
-
+// Copyright (c) 2014, HelightXu
+// Author: Zhwen Xu<HelightXu@gmail.com>
+// Created: 2014-06-08
+// Description:
+//
 #ifndef __XSRV_LOG_H__
 #define __XSRV_LOG_H__
 

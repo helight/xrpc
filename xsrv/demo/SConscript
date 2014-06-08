@@ -1,6 +1,6 @@
 Import('env')
 
-env.Prepend(LIBS = ['xsrv'])
+env.Prepend(LIBS = ['xsrv', 'xclient'])
 
 env.Program(
     target = "tserver",

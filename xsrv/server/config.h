@@ -1,11 +1,14 @@
+// Copyright (c) 2014, HelightXu
+// Author: Zhwen Xu<HelightXu@gmail.com>
+// Created: 2014-06-08
+// Description:
+//
 #ifndef _CONFIG_H
 #define _CONFIG_H
-#include "parse_conf.h"
-#include <vector>
 #include <set>
 #include <string>
-
-using namespace std;
+#include <vector>
+#include "parse_conf.h"
 
 struct MyIdentification
 {
@@ -55,6 +58,5 @@ private:
 	MyIdentification myIdentification;
 
 };
-
 
 #endif

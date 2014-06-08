@@ -1,27 +1,11 @@
-/*
- * xsrv
- *
- * CopyLeft (c) 2008-~ sebastien.vincent@cppextrem.com Helight.Xu@gmail.com
- *
- * This source code is released for free distribution under the terms of the
- * the Free Software Foundation, version 3 of the License
- * GNU General Public License.
- * You should have received a copy of the GNU Lesser General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- */
+// Copyright (c) 2014, HelightXu
+// Author: Zhwen Xu<HelightXu@gmail.com>
+// Created: 2014-06-08
+// Description: tcp server
+//
 
- /*
- * file name: xudpserver.h
- * modify date: 2012-03-11
- * Author: Sebastien Vincent,  Helight Xu
- *
- * Program definitions: brief udp server.
- */
-
-#ifndef XUDPSERVER_H
-#define XUDPSERVER_H
-#include <cstdio>
+#ifndef XTCPSERVER_H
+#define XTCPSERVER_H
 #include <signal.h>
 #include <time.h>
 #include <stdarg.h>
@@ -38,22 +22,18 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
-#include <stdio.h>
-#include <fcntl.h>
 #include <errno.h>
 #include <err.h>
-#include <jsonrpc/jsonrpc.h>
-#include <jsonrpc/json.h>
 #include <ev.h>
 #include "commnet.h"
-
-using namespace std;
+#include "jsonrpc/jsonrpc.h"
+#include "jsonrpc/json.h"
 
 /**
- * \class xudpserver
- * \brief Abstract JSON-RPC xudpserver.
+ * \class xtcpserver
+ * \brief Abstract JSON-RPC xtcpserver.
  */
-class xudpserver
+class xtcpserver
 {
 public:
 	/**
@@ -61,14 +41,15 @@ public:
 	 * \param address network address or FQDN to bind
 	 * \param port local port to bind
 	 */
-	xudpserver(const std::string& address, uint16_t port);
+	xtcpserver(const std::string& address, uint16_t port);
 
 	/**
 	 * \brief Destructor.
 	 */
-	~xudpserver();
+	~xtcpserver();
 
 	bool Init();
+
 
 	bool Start(json::rpc::Handler &handler);
 
@@ -126,5 +107,5 @@ private:
 
 };
 
-#endif /* XUDPSERVER_H */
+#endif /* XTCPSERVER_H */
 

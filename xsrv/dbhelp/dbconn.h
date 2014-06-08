@@ -1,14 +1,18 @@
-#include "mysql/mysql.h"
+// Copyright (c) 2014, HelightXu
+// Author: Zhwen Xu<HelightXu@gmail.com>
+// Created: 2014-06-08
+// Description:
+//
 #include <stdio.h>
 #include <vector>
 #include <string>
-using namespace std;
+#include "mysql/mysql.h"
 
 #ifndef ulong
-#define ulong unsigned long 
+#define ulong unsigned long
 #endif
 
-#ifndef uint 
+#ifndef uint
 #define uint unsigned int
 #endif
 
@@ -17,20 +21,20 @@ using namespace std;
 class dbconn
 {
 private:
-	MYSQL			m_SQLConn; 
+	MYSQL			m_SQLConn;
 	MYSQL_RES		*m_SQLResult; //用于保存查询后的结果集
-	MYSQL_ROW		m_SQLRow; 
+	MYSQL_ROW		m_SQLRow;
 	MYSQL_FIELD		*m_SQLField;
 	int			m_fieldCount;//查询返回表的列数
 	int			m_rowCount;//查询返回表的行数
 	bool			m_bConnect;
 
-	char			*m_szHost; 
-	char			*m_szDB; 
-	char			*m_szUser; 
+	char			*m_szHost;
+	char			*m_szDB;
+	char			*m_szUser;
 	char			*m_szPass;
 	uint			m_szPort;//连接端口
-	
+
 public:
 	dbconn(char* szHost,char* szDB,char* szUser,char* szPass,uint szPort)//connect to mysql
 	{
@@ -74,8 +78,8 @@ public:
 	ulong getLimitNum(char* szSQL);
 	char* getEarlyAndLateTime(int type, char* url, char* startYear, char* endYear);//0 early, 1 late
 	bool ExecuteSQL(char* szSql, vector<string> & vSql);
-	
-	bool ExecuteSQL(char* szSql, int & affectedRows);  
+
+	bool ExecuteSQL(char* szSql, int & affectedRows);
 
 public:
 	~dbconn()
@@ -85,4 +89,5 @@ public:
 		}
 	}
 };
+
 #endif

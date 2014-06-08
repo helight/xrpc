@@ -1,3 +1,8 @@
+// Copyright (c) 2014, HelightXu
+// Author: Zhwen Xu<HelightXu@gmail.com>
+// Created: 2014-06-08
+// Description:
+//
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/timeb.h>
@@ -39,7 +44,7 @@ xsrv_log::xsrv_log (int dwLevel,
 	_InitLock();
 }
 
-xsrv_log::~xsrv_log() 
+xsrv_log::~xsrv_log()
 {
 	// 对象析构的时候的把锁析构掉
 	_DestoryLock();
@@ -53,9 +58,9 @@ string xsrv_log::getlogfilename(const char* pcProfixName,int dwCurIndex)
 
 	if (dwCurIndex == 0)
 		strFileName += ".log";
-	else { 
-		sprintf(szIndex, "_%d", dwCurIndex);		
-		strFileName += string (szIndex) + ".log";		
+	else {
+		sprintf(szIndex, "_%d", dwCurIndex);
+		strFileName += string (szIndex) + ".log";
 	}
 
 	return strFileName;
@@ -89,7 +94,7 @@ void xsrv_log::hexlog (const char* pcFileName, const char* pcBuf, int dwLength)
 	_Lock();
 	if ((fp = fopen(pcFileName, "w+b"))) {
 		fwrite(pcBuf, dwLength, 1, fp);
-		fclose(fp); 
+		fclose(fp);
 	}
 	_UnLock();
 }
@@ -116,7 +121,7 @@ void xsrv_log::log (int dwLogLevel, const char* pcFileName, int dwLine,const cha
 	tm = localtime(&now);
 
 	// 打印日志时间、进程号、文件、行号、级别
-	dwPos += snprintf(szLogBuf+dwPos, sizeof(szLogBuf)-dwPos, 
+	dwPos += snprintf(szLogBuf+dwPos, sizeof(szLogBuf)-dwPos,
 			"[%04d-%02d-%02d %02d:%02d:%02d] (%d) [%s: %d] %s : ",
 			tm->tm_year + 1900, tm->tm_mon + 1, tm->tm_mday, tm->tm_hour, tm->tm_min, tm->tm_sec,
 			getpid(),pcFileName,dwLine,g_szLogLevel[dwLogLevel]);
@@ -127,7 +132,7 @@ void xsrv_log::log (int dwLogLevel, const char* pcFileName, int dwLine,const cha
 	va_end(ap);
 
 
-	_Lock();	
+	_Lock();
 	// 打印到屏幕
 #ifdef _BOTHOUT
 	printf("%s\n", szLogBuf);
@@ -147,7 +152,7 @@ int xsrv_log::shiftfiles (const char* pcFileName)
 	struct stat oFileStat;
 
 	// 检查是否需要切换日志文件
-	strTmp = getlogfilename (pcFileName, 0);			
+	strTmp = getlogfilename (pcFileName, 0);
 	if (stat (strTmp.c_str(), &oFileStat) < 0 || oFileStat.st_size < m_dwMaxLogSize)
 		return 0;
 
@@ -158,15 +163,15 @@ int xsrv_log::shiftfiles (const char* pcFileName)
 
 	// 文件重新命名
 	for (int i = m_dwMaxLogNum - 2; i >= 0; i--) {
-		strTmp = getlogfilename(pcFileName, i);			
+		strTmp = getlogfilename(pcFileName, i);
 		if (access(strTmp.c_str(), F_OK) == 0) {
-			strNewFile = getlogfilename(pcFileName, i + 1);	
+			strNewFile = getlogfilename(pcFileName, i + 1);
 			if (rename(strTmp.c_str(),strNewFile.c_str()) < 0 )
 				return -1;
 		}
 	}
 
-	return 0;	
+	return 0;
 }
 
 // 日志锁初始化

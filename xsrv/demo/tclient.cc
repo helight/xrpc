@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
-#include "xsrv/xtcpclient.h"
+#include "client/xtcpclient.h"
 
 int main(int argc, char *argv[])
 {
 	int len = 0;
-	string recvdata;
-	string strreq="{\"id\":10,\"jsonrpc\":\"2.0\",\"method\":\"Print\"}";
+    std::string recvdata;
+    std::string strreq="{\"id\":10,\"jsonrpc\":\"2.0\",\"method\":\"Print\"}";
 
 	xtcpclient client(std::string("127.0.0.1"), 8086);
 

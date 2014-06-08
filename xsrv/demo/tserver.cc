@@ -3,9 +3,9 @@
 #include <time.h>
 #include <sstream>
 #include <string>
-#include "xsrv/xtcpserver.h"
-#include "xsrv/config.h"
-// #include "xsrv/dbconn.h"
+#include "server/xtcpserver.h"
+#include "server/config.h"
+// #include "dbhelp/dbconn.h"
 
 class TestRpc
 {

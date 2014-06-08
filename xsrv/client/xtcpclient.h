@@ -1,3 +1,9 @@
+// Copyright (c) 2014, HelightXu
+// Author: Zhwen Xu<HelightXu@gmail.com>
+// Created: 2014-06-08
+// Description:
+//
+
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
@@ -6,8 +12,6 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <jsonrpc/json.h>
-
-using namespace std;
 
 /**
  * \class xtcpclient

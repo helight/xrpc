@@ -1,3 +1,8 @@
+// Copyright (c) 2014, HelightXu
+// Author: Zhwen Xu<HelightXu@gmail.com>
+// Created: 2014-06-08
+// Description:
+//
 #include "parse_conf.h"
 
 CReadIni::CReadIni()
@@ -37,7 +42,7 @@ int CReadIni::LoadConfigFile(const char* pFileName)
 		if (*p == '[') { //section
 			p++;
 			GetSection(p,section);
-		} else { 
+		} else {
 			GetKey(p,key,value);
 			if(section.length() >0 && key.length() >0){
 				AddToMap(section,key,value);
@@ -140,7 +145,7 @@ int CReadIni::GetConfigStr(const char* pSection,const char* pKey,char* pOutBuf,u
 }
 
 int CReadIni::GetConfigInt(const char* pSection,const char* pKey)
-{ 
+{
 	char buf[20];
 	int ret = GetConfigStr(pSection,pKey,buf,20);
 	if (ret !=0)

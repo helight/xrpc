@@ -1,23 +1,8 @@
-/*
- * xsrv
- *
- * CopyLeft (c) 2008-~ sebastien.vincent@cppextrem.com Helight.Xu@gmail.com
- *
- * This source code is released for free distribution under the terms of the
- * the Free Software Foundation, version 3 of the License
- * GNU General Public License.
- * You should have received a copy of the GNU Lesser General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- */
-
- /*
- * file name: commnet.cc
- * modify date: 2012-03-11
- * Author: Sebastien Vincent,  Helight Xu
- *
- * Program definitions: common net function.
- */
+// Copyright (c) 2014, HelightXu
+// Author: Zhwen Xu<HelightXu@gmail.com>
+// Created: 2014-06-08
+// Description:
+//
 
 #include <iostream>
 #include "commnet.h"
@@ -26,10 +11,10 @@ json::rpc::Handler *xhandler;
 static void Recv(struct ev_loop *loop, struct ev_io *w, int revents);
 static void Send(struct ev_loop *loop, struct ev_io *w, int revents);
 static void udp_send(struct ev_loop *loop, struct ev_io *w, int revents);
-bool check(string &msg, json::Value &recv, json::Value &response);
-string GetString(json::Value value);
+bool check(std::string &msg, json::Value &recv, json::Value &response);
+std::string GetString(json::Value value);
 
-bool check(string &msg, json::Value &recv, json::Value &response)
+bool check(std::string &msg, json::Value &recv, json::Value &response)
 {
 	bool parsing = false;
 	json::Value error;
@@ -49,7 +34,7 @@ bool check(string &msg, json::Value &recv, json::Value &response)
 	return true;
 }
 
-string GetString(json::Value value)
+std::string GetString(json::Value value)
 {
 	json::FastWriter m_writer;
 	return m_writer.write(value);
@@ -110,10 +95,10 @@ static void Recv(struct ev_loop *loop, struct ev_io *w, int revents)
 
 static void Send(struct ev_loop *loop, struct ev_io *w, int revents)
 {
-	string response;
+    std::string response;
 	struct client *cli= ((struct client*) (((char*)w) - offsetof(struct client,ev_write)));
 
-	string rbuff = cli->rbuff;
+    std::string rbuff = cli->rbuff;
 	if (check(rbuff, cli->recv, cli->response)) {
 		cli->response["id"] = cli->fd;
 		cli->response["jsonrpc"] = "2.0";
@@ -157,10 +142,10 @@ void udp_recv(struct ev_loop *loop, struct ev_io *w, int revents)
 
 static void udp_send(struct ev_loop *loop, struct ev_io *w, int revents)
 {
-	string response;
+    std::string response;
 	struct client *cli= ((struct client*) (((char*)w) - offsetof(struct client,ev_write)));
 
-	string rbuff = cli->rbuff;
+    std::string rbuff = cli->rbuff;
 	if (check(rbuff, cli->recv, cli->response)) {
 		cli->response["id"] = cli->fd;
 		cli->response["jsonrpc"] = "2.0";

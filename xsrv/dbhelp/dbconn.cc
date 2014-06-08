@@ -1,14 +1,19 @@
-#include "dbconn.h"
+// Copyright (c) 2014, HelightXu
+// Author: Zhwen Xu<HelightXu@gmail.com>
+// Created: 2014-06-08
+// Description:
+//
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "dbconn.h"
 
 bool dbconn::connect()
 {
 	mysql_init(&this->m_SQLConn);
 
 	if (mysql_real_connect(&this->m_SQLConn, this->m_szHost, this->m_szUser,
-				this->m_szPass, this->m_szDB, this->m_szPort, NULL, 0) == NULL) { 
+				this->m_szPass, this->m_szDB, this->m_szPort, NULL, 0) == NULL) {
 		printf("mysql_real_connect fail\n");
 		return false;
 	}
@@ -59,7 +64,7 @@ ulong dbconn::select(const char* szSQL, vector<string> &vSql)
 		} else {
 			StoreResult();
 			count =  GetResultRows();
-			for (int i = 0; i != count; i++) {		
+			for (int i = 0; i != count; i++) {
 				this->m_SQLRow = mysql_fetch_row(this->m_SQLResult);
 				for (int j = 0; j < dwRow; j++) {
 					if (this->m_SQLRow[j] == NULL)
@@ -157,7 +162,7 @@ bool dbconn::Update(const char* szSQL)
 		int Ret = mysql_query(&this->m_SQLConn, szSQL);
 		if (Ret != 0) {//失败
 			printf("<MySQL-WARNING> update db fail:%s</MySQL-WARNING>\n", mysql_error(&this->m_SQLConn));
-		} else 
+		} else
 			sucess = true;
 		close();
 	}
@@ -274,7 +279,7 @@ bool dbconn::ExecuteSQL(char* szSQL, vector<string> & vSql)
 	int dwRow = 1;
 	char *q = szSQL;
 	while (q != p) {
-		if (*q == ',') { 
+		if (*q == ',') {
 			++dwRow;
 		}
 		++q;
@@ -295,7 +300,7 @@ bool dbconn::ExecuteSQL(char* szSQL, vector<string> & vSql)
 		m_rowCount=mysql_num_rows(this->m_SQLResult);
 	}
 
-	for (int i = 0; i != m_rowCount; i++) {		
+	for (int i = 0; i != m_rowCount; i++) {
 		this->m_SQLRow = mysql_fetch_row(this->m_SQLResult);
 		for (int j = 0; j < dwRow; j++) {
 			if ( this->m_SQLRow[j] == NULL )
@@ -306,7 +311,7 @@ bool dbconn::ExecuteSQL(char* szSQL, vector<string> & vSql)
 	}
 
 	mysql_free_result(this->m_SQLResult);
-	return true;	
+	return true;
 }
 
 
@@ -331,8 +336,8 @@ bool dbconn::ExecuteSQL(char* szSQL, int & affectedRows )
 		//printf("m_SQLResult ==Not NULL\n");
 		m_rowCount = mysql_num_rows(this->m_SQLResult);
 		//affectedRows=m_rowCount;
-	}	
+	}
 
 	mysql_free_result(this->m_SQLResult);
-	return true;	
+	return true;
 }

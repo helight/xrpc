@@ -4,6 +4,8 @@
 // Description:
 //
 
+#include <sys/time.h>
+#include <sys/resource.h>
 #include <iostream>
 #include "commnet.h"
 json::rpc::Handler *xhandler;

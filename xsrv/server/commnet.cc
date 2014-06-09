@@ -110,7 +110,10 @@ static void Send(struct ev_loop *loop, struct ev_io *w, int revents)
 	cli->handler->Process(rbuff, cli->response, (void *)cli);
 	response = GetString(cli->response);
 	if (revents & EV_WRITE) {
-		write(cli->fd, response.c_str(), strlen(response.c_str()));
+		if (-1 == write(cli->fd, response.c_str(), strlen(response.c_str())))
+        {
+            // log error
+        }
 		ev_io_stop(EV_A_ w);
 	}
 

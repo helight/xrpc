@@ -8,7 +8,7 @@ env.Append(CPPPATH = [root_path, thirdparty, thirdparty + '/libev/include/'])
 env.Append(LIBPATH = [thirdparty + '/libev/lib/', thirdparty + '/jsonrpc/', root_path + '/server', root_path + '/client'])
 env.Append(LIBS = ['jsonrpc', 'ev'])
 
-env.Append(CCFLAGS = ['-Wall', '-O2', '-g'])
+env.Append(CCFLAGS = ['-g', '-O2'])
 env.Append(LINKFLAGS = ['-static'])
 Export('env')
 
